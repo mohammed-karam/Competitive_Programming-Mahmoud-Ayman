@@ -1,4 +1,5 @@
 # SegmentTree-Codeforces-EDU
 
 - sparse table 
-![image](https://github.com/user-attachments/assets/d9ecef92-47d6-4ab7-8bab-e4738d75c6fc)
+![image](https://github.com/user-attachments/assets/1b0670c8-b2f2-4b5b-afb9-52bfaff374ee)
+
