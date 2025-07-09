@@ -95,7 +95,7 @@ struct line{
     T side(pt p) {return cross(v,p)-c;}
     ld dist(pt p) {return abs(side(p)) / abs(v);}
     double sqDist(pt p) {return side(p)*side(p) / (T)sq(v);}
-    line prepThrought(pt p){ return {p, p + prep(p)};}
+    line prepThrought(pt p){ return {p, p + prep(v)};} // prep(v) not prep(p)
     bool cmpProj(pt p, pt q){
         return dot(v, p) < dot(v, q);
     }
