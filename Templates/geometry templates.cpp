@@ -210,3 +210,14 @@ bool inPolygon(vector<pt> p, pt a, bool strict = true) {
     }
     return numCrossings & 1; // inside if odd number of crossings
 }
+
+
+
+bool onPolygonSide (vector<pt>p , pt a) {
+    for (int i = 0, n = p.size(); i < n; i++) {
+        if (onSegment(p[i], p[(i + 1) % n], a)) {
+            return true;
+        }
+    }
+    return false;
+}
