@@ -170,7 +170,13 @@ ld segPoint(pt a, pt b, pt p) {
     }
     return min(abs(p-a), abs(p-b)); // otherwise distance to A or B
 }
-
+ld rayPoint(pt a, pt b, pt p) {
+    pt ab = b - a, ap = p - a;
+    if (dot(ab, ap) < 0) // point is behind the ray
+        return abs(ap);
+    line l(a, b);
+    return l.dist(p);
+}
 ld segSeg(pt a, pt b, pt c, pt d) {
     pt dummy;
     if (properInter(a,b,c,d,dummy))
