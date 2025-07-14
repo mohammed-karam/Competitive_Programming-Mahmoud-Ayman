@@ -1,3 +1,4 @@
+const long double PI = acos(-1);
 typedef ld T;
 typedef complex<T> pt;
 #define x real()
