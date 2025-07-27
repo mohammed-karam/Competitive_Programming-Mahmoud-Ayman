@@ -28,3 +28,16 @@ struct FenwickTree{
         return query(r)-query(l-1);
     }
 };
+
+
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    FenwickTree ft = FenwickTree(n);
+    for (int i = 0; i < n; i++) {
+        ft.update(i + 1, a[i]); // ✅ BIT is 1-indexed
+    }
+}
