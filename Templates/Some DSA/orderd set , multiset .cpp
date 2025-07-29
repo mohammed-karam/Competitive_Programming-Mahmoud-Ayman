@@ -29,3 +29,21 @@ int main()
     cout << sum << endl;
     return 0;
 }
+
+
+
+
+// explain
+
+Find the index (rank) of an element:
+👉 order_of_key(x) → number of elements strictly less than x.
+
+Get the k-th smallest element:
+👉 find_by_order(k) → iterator to the element with index k (0-based).
+
+
+    
+auto it = my_os.find_by_order(1); // returns iterator to 2nd smallest element
+if (it != my_os.end()) cout << *it;
+
+
