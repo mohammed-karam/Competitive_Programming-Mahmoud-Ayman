@@ -5,7 +5,33 @@ using namespace std;
 using namespace __gnu_pbds;
 #define ordered_set tree<int, null_type,less<>, rb_tree_tag,tree_order_statistics_node_update>// set
 
-typedef tree<int, null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update> ordered_multiset;
+// typedef tree<int, null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update> ordered_multiset;
+
+// ordered multiset
+template <typename T>
+using oms = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+template <typename T>
+class ordered_multiset : public oms<T> {
+   public:
+    oms<T>::iterator find(T k) {
+        int order = this->order_of_key(k);
+        return this->find_by_order(order);
+    }
+    template <typename U>
+    void erase(U it) { //erases key where 'it' is pointing currently
+        oms<T>::erase(it);
+    }
+    void erase(T k) {  // erases first entity of key = k
+        auto it = this->find(k);
+        this->erase(it);
+    }
+};
+
+
+
+
+
 #define ll long long
 void myerase(ordered_set &t, int v){
     int rank = t.order_of_key(v);//Number of elements that are less than v in t
