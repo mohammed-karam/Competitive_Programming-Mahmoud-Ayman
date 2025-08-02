@@ -23,3 +23,18 @@ struct KMP{
         }
     }
 };
+
+    
+🔧 Example: Pattern = "ababc"
+We want to compute longestPrefix[] for this pattern.
+
+Let's compute it step by step:
+
+i	P[0..i]	    Proper prefixes	        Proper suffixes	                LPS (prefix = suffix)?	longestPrefix[i]
+0	a	        -	                        -	                        -	                            0
+1	ab	        a	                        b	                        no	                            0
+2	aba	        a, ab	                    a, ba	                    a == a	                        1
+3	abab	    a, ab, aba                	b, ab, bab	                ab == ab	                    2
+4	ababc	    a, ab, aba, abab	        c, bc, abc, bbc            	no	                            0
+
+longestPrefix = [0, 0, 1, 2, 0]
