@@ -41,6 +41,24 @@ struct Sagara {
         return res;
     }
 
+
+    void build(vector<int> &a, int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            if (lx < (int)a.size())
+                node[x].val = a[lx];  // leaf = array value
+            return;
+        }
+        build(a, lNode, lx, md);
+        build(a, rNode, md, rx);
+        node[x] = merge(node[lNode], node[rNode]);
+    }
+
+    void build(vector<int> &a) {
+        build(a, 0, 0, n);
+    }
+
+
+
     void propagate(int x, int lx, int rx) {
         if (rx - lx == 1 || !node[x].isLazy) return;
         // give the lazy value of the father to his children and make the father's lazy = 0.
