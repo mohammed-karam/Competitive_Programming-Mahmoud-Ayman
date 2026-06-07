@@ -58,11 +58,11 @@ bool inAngle(pt a, pt b, pt c, pt p) {
     return (abp >= 0 && acp <= 0) ^ (abc < 0);
 }
 
-//Get angle between V, W
-ld angle(pt v, pt w) {
-    return acos(clamp(dot(v,w) / abs(v) / abs(w), (T)-1.0,(T)1.0));
+T angle(pt v, pt w) {
+    // cross(v,w) acts as the sine component, dot(v,w) acts as the cosine component.
+    // fabs() ensures we always get the shortest positive non-oriented angle [0, PI].
+    return atan2(fabs(cross(v, w)), dot(v, w));
 }
-
 //calc BAC angle
 ld orientedAngle(pt a, pt b, pt c) {
     if (orient(a,b,c) >= 0)
