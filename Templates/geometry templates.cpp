@@ -53,8 +53,10 @@ T orient(pt a, pt b, pt c){
     return cross(b - a, c - a);
 }
 
-T angle(pt v, pt w){
-    return acos(clamp(dot(v, w) / abs(v) / abs(w), (T)-1.0, (T)1.0));
+T angle(pt v, pt w) {
+    // cross(v,w) acts as the sine component, dot(v,w) acts as the cosine component.
+    // fabs() ensures we always get the shortest positive non-oriented angle [0, PI].
+    return atan2(fabs(cross(v, w)), dot(v, w));
 }
 
 T orientedAngle(pt a, pt b, pt c){
