@@ -8,6 +8,8 @@ T sq(pt p){
     return p.x * p.x + p.y * p.y;
 }
 
+
+
 T dot(pt v, pt w){
     return v.x * w.x + v.y * w.y;
 }
@@ -21,6 +23,15 @@ int sgn(T val){
     if(val < -EPS) return -1;
     return 0;
 }
+
+pt unitVector(pt p) {
+    ld len = abs(p);
+    if (len < EPS) {
+        return {0, 0};
+    }
+    return p / len;
+}
+
 
 bool isPerp(pt v, pt w){
     return fabs(dot(v, w)) < EPS;
@@ -230,3 +241,6 @@ bool onPolygonSide (vector<pt>p , pt a) {
     }
     return false;
 }
+
+
+
