@@ -242,5 +242,27 @@ bool onPolygonSide (vector<pt>p , pt a) {
     return false;
 }
 
+// Returns the center of gravity (centroid) of a given polygon.
+// The polygon vertices must be given in consecutive order (CW or CCW).
+pt polygonCentroid(const vector<pt>& p) {
+    int n = p.size();
+    ld area = 0.0;
+    ld cx = 0.0, cy = 0.0;
 
+    for (int i = 0; i < n; i++) {
+        int next = (i + 1) % n;
+        // The cross product acts as the signed area weight
+        ld cross_val = cross(p[i], p[next]); 
+        
+        area += cross_val;
+        cx += (p[i].x + p[next].x) * cross_val;
+        cy += (p[i].y + p[next].y) * cross_val;
+    }
+
+    area /= 2.0;
+    cx /= (6.0 * area);
+    cy /= (6.0 * area);
+
+    return {cx, cy};
+}
 
