@@ -266,3 +266,40 @@ pt polygonCentroid(const vector<pt>& p) {
     return {cx, cy};
 }
 
+// for picks theory
+
+// Returns the exact number of integer coordinates lying on the boundary of the polygon
+int boundaryPoints(const vector<pt>& p) {
+    int b = 0;
+    int n = p.size();
+    for (int i = 0; i < n; i++) {
+        int next = (i + 1) % n;
+        // The number of integer points on a segment is exactly the GCD of dx and dy
+        int dx = abs(p[i].x - p[next].x);
+        int dy = abs(p[i].y - p[next].y);
+        b += std::gcd(dx, dy);
+    }
+    return b;
+}
+
+// Returns strictly 2 * Area of the polygon as an integer
+int doubleAreaPolygon(const vector<pt>& p) {
+    int doubleArea = 0;
+    int n = p.size();
+    for (int i = 0; i < n; i++) {
+        int next = (i + 1) % n;
+        doubleArea += cross(p[i], p[next]); 
+    }
+    return abs(doubleArea);
+}
+
+
+// Returns the exact number of strictly interior integer points (the trees!)
+int interiorPoints(const vector<pt>& p) {
+    int b = boundaryPoints(p);
+    int doubleArea = doubleAreaPolygon(p);
+    
+    // Applying Pick's Theorem: I = (2*Area - B + 2) / 2
+    return (doubleArea - b + 2) / 2;
+}
+
