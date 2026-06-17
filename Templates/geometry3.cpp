@@ -240,3 +240,21 @@ double maximum_dist_from_polygon_to_polygon(vector<PT> &u, vector<PT> &v){ //O(n
     }
     return sqrt(ans);
 }
+
+
+bool inConvex(vector<pt> &p, pt a) {
+    if (p.size() < 3) return false;
+
+    int n = p.size();
+    int l = 1 , r = n - 2 , mid , ans = 1;
+    while (l <= r) {
+        mid = (l + r) / 2;
+        if (sgn(orient(p[0] , p[mid] , a)) > 0) {
+            l = mid + 1;
+            ans = mid;
+        }else {
+            r = mid - 1;
+        }
+    }
+    return inPolygon({p[0] , p[ans] , p[ans+1] }, a , false);
+}
