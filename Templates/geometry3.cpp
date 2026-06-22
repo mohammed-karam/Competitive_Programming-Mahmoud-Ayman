@@ -258,3 +258,25 @@ bool inConvex(vector<pt> &p, pt a) {
     }
     return inPolygon({p[0] , p[ans] , p[ans+1] }, a , false);
 }
+
+
+bool StrictInConvex(vector<pt> &p, pt a) {
+    if (p.size() < 3) return false;
+
+    int n = p.size();
+    int l = 1, r = n - 2, mid, ans = 1;
+    while (l <= r) {
+        mid = (l + r) / 2;
+        if (sgn(orient(p[0], p[mid], a)) > 0) {
+            l = mid + 1;
+            ans = mid;
+        } else {
+            r = mid - 1;
+        }
+    }
+    bool f = true;
+    if (ans == 1) f= !onSegment(p[1] , p[2] , a) && !onSegment(p[0] , p[1] , a);
+    else if (ans == n-2) f = !onSegment(p[n-2] , p[n-1] , a) && !onSegment(p[n-1] , p[0] , a);
+
+    return inPolygon({p[0], p[ans], p[ans + 1]}, a, false) && f;
+}
